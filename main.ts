@@ -1,4 +1,4 @@
-/*
+add the new blocks to this one ;/*
 Copyright (C): 2010-2019, Shenzhen Yahboom Tech
 modified from liusen
 load dependency
@@ -254,7 +254,7 @@ namespace Tinybit {
     
 
 
-    //% blockId=Tinybit_RGB_Car_Big block="RGB_Car_Big|value %value"
+    //% blockId=Tinybit_RGB_Car_Big block="Light color %value"
     //% weight=98
     //% blockGap=10
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
