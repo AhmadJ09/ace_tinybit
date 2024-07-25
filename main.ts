@@ -528,16 +528,6 @@ namespace Tinybit {
          setPwmMotor(0, 0, 0); // Stop the robot
      }
 
-
-     //% blockId=stop_robot block="stop robot"
-     //% weight=98
-     //% blockGap=10
-     //% color="#FF5733"
-     export function stopRobot(): void {
-        setPwmMotor(0, 0, 0); // Stop all motors
- 
-     }
-
      // Enum for direction selection with limited options for steps
      //% color="#585CA9"
      export enum Direction {
