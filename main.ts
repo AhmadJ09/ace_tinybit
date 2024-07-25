@@ -519,5 +519,115 @@ export function RGB_Car_Big2(Red: number, Green: number, Blue: number): void {
              setPwmMotor(0, 0, 0); // Stop all motors
 
      }
+               
+     // Function to turn the robot by a specific angle
+     //% blockId=turn_robot_angle block="Turn robot %direction by %angle degrees"
+     //% weight=100
+     //% angle.min=0 angle.max=360
+     //% blockGap=10
+     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
+     export function turnRobotByAngle(direction: TurnDirection, angle: number): void {
+         let turnTimePer90Degrees = 500; // Time to turn 90 degrees
+         let turnTime = (angle / 90) * turnTimePer90Degrees; // Calculate time for the specified angle
 
+         if (direction === TurnDirection.Left) {
+             setPwmMotor(3, 100, 100); // Turn left
+         } else if (direction === TurnDirection.Right) {
+             setPwmMotor(4, 100, 100); // Turn right
+         }
+         control.waitMicros(turnTime * 1000); // Wait for the calculated time
+         setPwmMotor(0, 0, 0); // Stop the robot
+     }
+
+
+         //% blockId=stop_robot block="stop robot"
+         //% weight=98
+         //% blockGap=10
+        //% color="#FF5733"
+         export function stopRobot(): void {
+             setPwmMotor(0, 0, 0); // Stop all motors
+ 
+     }
+
+     // Enum for direction selection with limited options for steps
+     //% color="#585CA9"
+     export enum Direction {
+         //% block="Forward"
+         Forward,
+         //% block="Backward"
+         Backward
+     }
+
+     // Function for moving robot based on steps
+     //% blockId=move_robot_steps block="Move robot %direction for %steps steps"
+     //% weight=101 color=#585CA9
+     export function moveRobotBySteps(direction: Direction, steps: number): void {
+         const speed = 100;
+         const stepDuration = 500; // 0.5 seconds in milliseconds
+
+         for (let i = 0; i < steps; i++) {
+             if (direction == Direction.Forward) {
+                 motors.runMotor(Motor.Left, speed);
+                 motors.runMotor(Motor.Right, speed);
+             } else if (direction == Direction.Backward) {
+                 motors.runMotor(Motor.Left, -speed);
+                 motors.runMotor(Motor.Right, -speed);
+             }
+             basic.pause(stepDuration);
+             motors.stopAll();
+             basic.pause(100); // Small delay between steps
+         }
+     }
+
+     // Enum for direction selection with extended options for time-based movement
+     //% color="#585CA9"
+     export enum MoveDirection {
+         //% block="Forward"
+         Forward,
+         //% block="Backward"
+         Backward,
+         //% block="Left"
+         Left,
+         //% block="Right"
+         Right
+     }
+
+     // Function for moving robot based on time
+     //% blockId=move_robot_time block="Move robot %direction|for %time s"
+     //% weight=100
+     //% blockGap=10
+     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
+     export function moveRobotByTime(direction: MoveDirection, time: number): void {
+         switch (direction) {
+             case MoveDirection.Forward:
+                 setPwmMotor(1, 100, 100); // Move forward
+                 break;
+             case MoveDirection.Backward:
+                 setPwmMotor(2, 100, 100); // Move backward
+                 break;
+             case MoveDirection.Left:
+                 setPwmMotor(3, 100, 100); // Move left
+                 break;
+             case MoveDirection.Right:
+                 setPwmMotor(4, 100, 100); // Move right
+                 break;
+         }
+         control.waitMicros(time ; // Convert milliseconds to microseconds
+         setPwmMotor(0, 0, 0); // Stop the robot
+     }
+
+     // Function to convert distance in cm to steps
+     function distanceToSteps(distance: number): number {
+         const stepsPerCm = 10; // Example conversion rate, adjust based on calibration
+         return distance * stepsPerCm;
+     }
+
+     // Function to move the robot based on distance
+     //% blockId=move_robot_distance block="Move robot %direction for %distance cm"
+     //% weight=102 color=#585CA9
+     export function moveRobotByDistance(direction: Direction, distance: number): void {
+          let steps = distanceToSteps(distance);
+    
+         moveRobotBySteps(direction, steps);
+     }
 }
