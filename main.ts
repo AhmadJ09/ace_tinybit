@@ -498,17 +498,7 @@ namespace Tinybit {
          control.waitMicros(turnTime * 1000); // Wait for the calculated time
          setPwmMotor(0, 0, 0); // Stop the robot
      }
-
-
-     //% blockId=stop_robot block="stop robot"
-     //% weight=98
-     //% blockGap=10
-     //% color="#FF5733"
-     export function stopRobot(): void {
-     setPwmMotor(0, 0, 0); // Stop all motors
-
-     }
-               
+              
      // Function to turn the robot by a specific angle
      //% blockId=turn_robot_angle block="Turn robot %direction by %angle degrees"
      //% weight=100
@@ -595,11 +585,6 @@ namespace Tinybit {
          setPwmMotor(0, 0, 0); // Stop the robot
      }
 
-     // Function to convert distance in cm to steps
-     function distanceToSteps(distance: number): number {
-         const stepsPerCm = 10; // Example conversion rate, adjust based on calibration
-         return distance * stepsPerCm;
-     }
 
      // Function to move the robot based on distance
      //% blockId=move_robot_distance block="Move robot %direction for %distance cm"
