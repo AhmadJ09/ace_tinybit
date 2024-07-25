@@ -465,5 +465,30 @@ export function RGB_Car_Big2(Red: number, Green: number, Blue: number): void {
 				return  Math.floor(length);
     }
 
+// Enum for turning direction
+//% color="#585CA9"
+export enum TurnDirection {
+    //% block="Left"
+    Left,
+    //% block="Right"
+    Right
+}
+
+// Function to turn the robot by 90 degrees
+//% blockId=turn_robot_90 block="Turn robot %direction "
+//% weight=99
+//% blockGap=10
+//% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
+export function turnRobot90(direction: TurnDirection): void {
+    let turnTime = 500; // Adjust this value based on your robot's turning speed and calibration
+
+    if (direction === TurnDirection.Left) {
+        setPwmMotor(3, 100, 100); // Turn left
+    } else if (direction === TurnDirection.Right) {
+        setPwmMotor(4, 100, 100); // Turn right
+    }
+    control.waitMicros(turnTime * 1000); // Wait for the specified time
+    setPwmMotor(0, 0, 0); // Stop the robot
+}
 
 }
