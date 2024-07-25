@@ -294,18 +294,7 @@ namespace Tinybit {
                 break;
             }
         }
-    }
-    //% blockId=Tinybit_RGB_Car_Big2 block="Light Color|Red %Red|Green %Green|Blue %Blue"
-    //% weight=4
-    //% blockGap=10
-    //% Red.min=0 Red.max=255 Green.min=0 Green.max=255 Blue.min=0 Blue.max=255
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function RGB_Car_Big2(Red: number, Green: number, Blue: number): void {
-        setPwmRGB(Red, Green, Blue);
-    }
-
-
-    
+    }  
     //% blockId=Tinybit_Music_Car block="Music_Car|%index"
     //% weight=11
     //% blockGap=10
