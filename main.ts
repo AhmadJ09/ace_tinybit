@@ -463,7 +463,7 @@ namespace Tinybit {
          Right
      }
 
-      // Function to turn the robot by 90 degrees
+     // Function to turn the robot by 90 degrees
      //% blockId=turn_robot_90 block="Turn robot %direction "
      //% weight=99
      //% blockGap=10
@@ -500,12 +500,12 @@ namespace Tinybit {
      }
 
 
-         //% blockId=stop_robot block="stop robot"
-         //% weight=98
-         //% blockGap=10
-         //% color="#FF5733"
-         export function stopRobot(): void {
-             setPwmMotor(0, 0, 0); // Stop all motors
+     //% blockId=stop_robot block="stop robot"
+     //% weight=98
+     //% blockGap=10
+     //% color="#FF5733"
+     export function stopRobot(): void {
+     setPwmMotor(0, 0, 0); // Stop all motors
 
      }
                
@@ -529,12 +529,12 @@ namespace Tinybit {
      }
 
 
-         //% blockId=stop_robot block="stop robot"
-         //% weight=98
-         //% blockGap=10
-        //% color="#FF5733"
-         export function stopRobot(): void {
-             setPwmMotor(0, 0, 0); // Stop all motors
+     //% blockId=stop_robot block="stop robot"
+     //% weight=98
+     //% blockGap=10
+     //% color="#FF5733"
+     export function stopRobot(): void {
+        setPwmMotor(0, 0, 0); // Stop all motors
  
      }
 
