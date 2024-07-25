@@ -473,7 +473,7 @@ export enum TurnDirection {
     }
 
     //% blockId=turn_robot block="turn robot %direction|"
-    //% weight=99
+    //% weight=98
     //% blockGap=10
     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
     export function turnRobot(direction: TurnDirection): void {
@@ -489,7 +489,7 @@ export enum TurnDirection {
     }
 
     //% blockId=stop_robot block="stop robot"
-    //% weight=98
+    //% weight=99
     //% blockGap=10
     //% color="#FF5733"
     export function stopRobot(): void {
