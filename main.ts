@@ -473,11 +473,11 @@ export enum TurnDirection {
     }
 
     //% blockId=turn_robot block="turn robot %direction|"
-    //% weight=98
+    //% weight=99
     //% blockGap=10
     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
     export function turnRobot(direction: TurnDirection): void {
-        let turnTime = 400; // Adjust this value based on your robot's turning speed and calibration
+        let turnTime = 500; // Adjust this value based on your robot's turning speed and calibration
 
         if (direction === TurnDirection.Left) {
             setPwmMotor(3, 100, 100); // Turn left
@@ -489,7 +489,7 @@ export enum TurnDirection {
     }
 
     //% blockId=stop_robot block="stop robot"
-    //% weight=99
+    //% weight=98
     //% blockGap=10
     //% color="#FF5733"
     export function stopRobot(): void {
@@ -497,28 +497,6 @@ export enum TurnDirection {
 
 }
 
-	
-// Function for moving robot based on time
-//% blockId=move_robot_time block="Move robot %direction|for %time s"
-//% weight=100
-//% blockGap=10
-//% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
-export function moveRobotByTime(direction: MoveDirection, time: number): void {
-    switch (direction) {
-        case MoveDirection.Forward:
-            setPwmMotor(1, 100, 100); // Move forward
-            break;
-        case MoveDirection.Backward:
-            setPwmMotor(2, 100, 100); // Move backward
-            break;
-        case MoveDirection.Left:
-            setPwmMotor(3, 100, 100); // Move left
-            break;
-        case MoveDirection.Right:
-            setPwmMotor(4, 100, 100); // Move right
-            break;
-    }
-    control.waitMicros(time); // Convert milliseconds to microseconds
-    setPwmMotor(0, 0, 0); // Stop the robot
-}
+
+
 }
