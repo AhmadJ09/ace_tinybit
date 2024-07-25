@@ -499,7 +499,7 @@ export enum TurnDirection {
 
 	
 // Function for moving robot based on time
-//% blockId=move_robot_time block="Move robot %direction|for %time ms"
+//% blockId=move_robot_time block="Move robot %direction|for %time s"
 //% weight=100
 //% blockGap=10
 //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
@@ -518,7 +518,7 @@ export function moveRobotByTime(direction: MoveDirection, time: number): void {
             setPwmMotor(4, 100, 100); // Move right
             break;
     }
-    control.waitMicros(time*1000); // Convert milliseconds to microseconds
+    control.waitMicros(time); // Convert milliseconds to microseconds
     setPwmMotor(0, 0, 0); // Stop the robot
 }
 }
