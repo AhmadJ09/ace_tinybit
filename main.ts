@@ -496,40 +496,4 @@ export enum TurnDirection {
         setPwmMotor(0, 0, 0); // Stop all motors
 
 }
- // Enum for direction selection with extended options for time-based movement
-//% color="#585CA9"
-export enum MoveDirection {
-    //% block="Forward"
-    Forward,
-    //% block="Backward"
-    Backward,
-    //% block="Left"
-    Left,
-    //% block="Right"
-    Right
-}
-
-     // Function for moving robot based on time
-     //% blockId=move_robot_time block="Move robot %direction|for %time s"
-     //% weight=100
-     //% blockGap=10
-     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
-     export function moveRobotByTime(direction: MoveDirection, time: number): void {
-         switch (direction) {
-             case MoveDirection.Forward:
-                setPwmMotor(1, 100, 100); // Move forward
-                break;
-             case MoveDirection.Backward:
-                 setPwmMotor(2, 100, 100); // Move backward
-                 break;
-             case MoveDirection.Left:
-                 setPwmMotor(3, 100, 100); // Move left
-                 break;
-             case MoveDirection.Right:
-                 setPwmMotor(4, 100, 100); // Move right
-                 break;
-         }
-         control.waitMicros(time ; // Convert milliseconds to microseconds
-          setPwmMotor(0, 0, 0); // Stop the robot
-     }
 }
