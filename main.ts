@@ -5,7 +5,7 @@ load dependency
 "Tinybit": "file:../pxt-Tinybit"
 */
 
-//% color="#006400" weight=20 icon="\uf1b9"
+//% color="#585CA9" weight=20 icon="\uf1b9"
 namespace Tinybit {
 
     const PWM_ADD = 0x01
@@ -219,9 +219,9 @@ namespace Tinybit {
      */   
 
     //% blockId=Tinybit_RGB_Car_Program block="RGB_Car_Program"
-    //% weight=99
+    //% weight=0
     //% blockGap=10
-    //% color="#006400"
+    //% color="#585CA9"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function RGB_Car_Program(): neopixel.Strip {
          
@@ -232,9 +232,9 @@ namespace Tinybit {
     }  
 
     //% blockId=one_step_forward block="one_step_forward"
-    //% weight=99
+    //% weight=1
     //% blockGap=10
-    //% color="#006400"
+    //% color="#585CA9"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function one_step_forward(): void {
          
@@ -243,9 +243,9 @@ namespace Tinybit {
 
     
     //% blockId=Move_Steps block="Move_Steps|n_steps %n_steps"
-    //% weight=99
+    //% weight=2
     //% blockGap=10
-    //% color="#006400"
+    //% color="#585CA9"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function Move_Steps(n_steps: number): void {
          
@@ -254,8 +254,8 @@ namespace Tinybit {
     
 
 
-    //% blockId=Tinybit_RGB_Car_Big block="RGB_Car_Big|value %value"
-    //% weight=98
+    //% blockId=Tinybit_RGB_Car_Big block="Light Color %value"
+    //% weight=3
     //% blockGap=10
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function RGB_Car_Big(value: enColor): void {
@@ -295,20 +295,21 @@ namespace Tinybit {
             }
         }
     }
-    //% blockId=Tinybit_RGB_Car_Big2 block="RGB_Car_Big2|value1 %value1|value2 %value2|value3 %value3"
-    //% weight=97
-    //% blockGap=10
-    //% value1.min=0 value1.max=255 value2.min=0 value2.max=255 value3.min=0 value3.max=255
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function RGB_Car_Big2(value1: number, value2: number, value3: number): void {
+//% blockId=Tinybit_RGB_Car_Big2 block="Light Color|Red %Red|Green %Green|Blue %Blue"
+//% weight=4
+//% blockGap=10
+//% Red.min=0 Red.max=255 Green.min=0 Green.max=255 Blue.min=0 Blue.max=255
+//% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
+export function RGB_Car_Big2(Red: number, Green: number, Blue: number): void {
+    setPwmRGB(Red, Green, Blue);
+}
 
-        setPwmRGB(value1, value2, value3);
 
-    }
+    
     //% blockId=Tinybit_Music_Car block="Music_Car|%index"
-    //% weight=95
+    //% weight=11
     //% blockGap=10
-    //% color="#006400"
+    //% color="#585CA9"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function Music_Car(index: enMusic): void {
         switch (index) {
@@ -338,9 +339,9 @@ namespace Tinybit {
     
     
     //% blockId=Tinybit_CarCtrl block="CarCtrl|%index"
-    //% weight=93
+    //% weight=5
     //% blockGap=10
-    //% color="#006400"
+    //% color="#585CA9"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
     export function CarCtrl(index: CarState): void {
         switch (index) {
@@ -355,10 +356,10 @@ namespace Tinybit {
     }
     
     //% blockId=Tinybit_CarCtrlSpeed block="CarCtrlSpeed|%index|speed %speed"
-    //% weight=92
+    //% weight=6
     //% blockGap=10
     //% speed.min=0 speed.max=255
-    //% color="#006400"
+    //% color="#585CA9"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
     export function CarCtrlSpeed(index: CarState, speed: number): void {
         switch (index) {
@@ -373,10 +374,10 @@ namespace Tinybit {
     }
     
     //% blockId=Tinybit_CarCtrlSpeed2 block="CarCtrlSpeed2|%index|speed1 %speed1|speed2 %speed2"
-    //% weight=91
+    //% weight=7
     //% blockGap=10
     //% speed1.min=0 speed1.max=255 speed2.min=0 speed2.max=255
-    //% color="#006400"
+    //% color="#585CA9"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
     export function CarCtrlSpeed2(index: CarState, speed1: number, speed2: number): void {
         switch (index) {
@@ -392,10 +393,10 @@ namespace Tinybit {
         
    
     
-    //% blockId=Tinybit_Line_Sensor block="Line_Sensor|direct %direct|value %value"
-    //% weight=89
+    //% blockId=Tinybit_Line_Sensor block="Line Sensor Detector %direct|value %value"
+    //% weight=8
     //% blockGap=10
-    //% color="#006400"
+    //% color="#585CA9"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=12
     export function Line_Sensor(direct: enPos, value: enLineState): boolean {
 
@@ -428,7 +429,7 @@ namespace Tinybit {
     }
 
     //% blockId=Tinybit_Voice_Sensor block="Voice Sensor return"
-    //% weight=88
+    //% weight=9
     //% blockGap=10
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=12
     export function Voice_Sensor(): number {
@@ -441,8 +442,8 @@ namespace Tinybit {
     }
         
     //% blockId=Tinybit_Ultrasonic_Car block="ultrasonic return distance(cm)"
-    //% color="#006400"
-    //% weight=87
+    //% color="#585CA9"
+    //% weight=10
     //% blockGap=10
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
     export function Ultrasonic_Car(): number {
@@ -463,5 +464,143 @@ namespace Tinybit {
 				let length = (list[1] + list[2] + list[3])/3;
 				return  Math.floor(length);
     }
+
+// Enum for turning direction
+//% color="#585CA9"
+export enum TurnDirection {
+    //% block="Left"
+    Left,
+    //% block="Right"
+    Right
+}
+
+// Function to turn the robot by 90 degrees
+//% blockId=turn_robot_90 block="Turn robot %direction "
+//% weight=99
+//% blockGap=10
+//% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
+export function turnRobot90(direction: TurnDirection): void {
+    let turnTime = 500; // Adjust this value based on your robot's turning speed and calibration
+
+    if (direction === TurnDirection.Left) {
+        setPwmMotor(3, 100, 100); // Turn left
+    } else if (direction === TurnDirection.Right) {
+        setPwmMotor(4, 100, 100); // Turn right
+    }
+    control.waitMicros(turnTime * 1000); // Wait for the specified time
+    setPwmMotor(0, 0, 0); // Stop the robot
+}
+
+// Function to turn the robot by a specific angle
+//% blockId=turn_robot_angle block="Turn robot %direction by %angle degrees"
+//% weight=100
+//% angle.min=0 angle.max=360
+//% blockGap=10
+//% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
+export function turnRobotByAngle(direction: TurnDirection, angle: number): void {
+    let turnTimePer90Degrees = 500; // Time to turn 90 degrees
+    let turnTime = (angle / 90) * turnTimePer90Degrees; // Calculate time for the specified angle
+
+    if (direction === TurnDirection.Left) {
+        setPwmMotor(3, 100, 100); // Turn left
+    } else if (direction === TurnDirection.Right) {
+        setPwmMotor(4, 100, 100); // Turn right
+    }
+    control.waitMicros(turnTime * 1000); // Wait for the calculated time
+    setPwmMotor(0, 0, 0); // Stop the robot
+}
+
+
+    //% blockId=stop_robot block="stop robot"
+    //% weight=98
+    //% blockGap=10
+    //% color="#FF5733"
+    export function stopRobot(): void {
+        setPwmMotor(0, 0, 0); // Stop all motors
+
+}
+
+// Enum for direction selection with limited options for steps
+//% color="#585CA9"
+export enum Direction {
+    //% block="Forward"
+    Forward,
+    //% block="Backward"
+    Backward
+}
+
+// Function for moving robot based on steps
+//% blockId=move_robot_steps block="Move robot %direction for %steps steps"
+//% weight=101 color=#585CA9
+export function moveRobotBySteps(direction: Direction, steps: number): void {
+    const speed = 100;
+    const stepDuration = 500; // 0.5 seconds in milliseconds
+
+    for (let i = 0; i < steps; i++) {
+        if (direction == Direction.Forward) {
+            motors.runMotor(Motor.Left, speed);
+            motors.runMotor(Motor.Right, speed);
+        } else if (direction == Direction.Backward) {
+            motors.runMotor(Motor.Left, -speed);
+            motors.runMotor(Motor.Right, -speed);
+        }
+        basic.pause(stepDuration);
+        motors.stopAll();
+        basic.pause(100); // Small delay between steps
+    }
+}
+
+// Enum for direction selection with extended options for time-based movement
+//% color="#585CA9"
+export enum MoveDirection {
+    //% block="Forward"
+    Forward,
+    //% block="Backward"
+    Backward,
+    //% block="Left"
+    Left,
+    //% block="Right"
+    Right
+}
+
+// Function for moving robot based on time
+//% blockId=move_robot_time block="Move robot %direction|for %time s"
+//% weight=100
+//% blockGap=10
+//% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
+export function moveRobotByTime(direction: MoveDirection, time: number): void {
+    switch (direction) {
+        case MoveDirection.Forward:
+            setPwmMotor(1, 100, 100); // Move forward
+            break;
+        case MoveDirection.Backward:
+            setPwmMotor(2, 100, 100); // Move backward
+            break;
+        case MoveDirection.Left:
+            setPwmMotor(3, 100, 100); // Move left
+            break;
+        case MoveDirection.Right:
+            setPwmMotor(4, 100, 100); // Move right
+            break;
+    }
+    control.waitMicros(time); // Convert milliseconds to microseconds
+    setPwmMotor(0, 0, 0); // Stop the robot
+}
+
+// Function to convert distance in cm to steps
+function distanceToSteps(distance: number): number {
+    const stepsPerCm = 10; // Example conversion rate, adjust based on calibration
+    return distance * stepsPerCm;
+}
+
+// Function to move the robot based on distance
+//% blockId=move_robot_distance block="Move robot %direction for %distance cm"
+//% weight=102 color=#585CA9
+export function moveRobotByDistance(direction: Direction, distance: number): void {
+    let steps = distanceToSteps(distance);
+    
+    moveRobotBySteps(direction, steps);
+}
+
 
 }
