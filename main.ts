@@ -422,7 +422,7 @@ namespace Tinybit {
         Right
     }
 
-    //% blockId=move_robot block="move robot %direction|for %time ms"
+    //% blockId=move_robot block="move robot %direction|for %time s"
     //% weight=100
     //% blockGap=10
     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
@@ -442,7 +442,7 @@ namespace Tinybit {
                 setPwmMotor(4, 100, 100); // Move right
                 break;
         }
-        control.waitMicros(time * 1000); // Wait for the specified time
+        control.waitMicros(time * 1000000); // Wait for the specified time
         setPwmMotor(0, 0, 0); // Stop the robot
     }
 
@@ -469,13 +469,13 @@ namespace Tinybit {
     //% blockId=stop_robot block="stop robot"
     //% weight=99
     //% blockGap=10
-    //% color="#FF5733"
+    //% color="#bf6753"
     export function stopRobot(): void {
         setPwmMotor(0, 0, 0); // Stop all motors
     }
 
 
-        // Function to turn the robot by a specific angle
+    // Function to turn the robot by a specific angle
     //% blockId=turn_robot_angle block="Turn robot %direction by %angle degrees"
     //% weight=92
     //% angle.min=0 angle.max=360
@@ -493,4 +493,82 @@ namespace Tinybit {
         control.waitMicros(turnTime * 1000); // Wait for the calculated time
         setPwmMotor(0, 0, 0); // Stop the robot
     }
+
+
+
+// Enum for direction
+export enum Direction {
+    //% block="forward"
+    Forward,
+    //% block="backward"
+    Backward
+}
+
+// Function to move the robot by steps
+//% blockId=move_robot_steps block="Move robot %direction for %steps steps"
+//% weight=101 color=#585CA9
+export function moveRobotBySteps(direction: Direction, steps: number): void {
+    for (let i = 0; i < steps; i++) {
+        if (direction === Direction.Forward) {
+            setPwmMotor(1, 100, 100); // Move forward
+        } else if (direction === Direction.Backward) {
+            setPwmMotor(2, 100, 100); // Move backward
+        }
+        basic.pause(200); // Pause for visibility of each step
+        // Stop motors after each step
+        setPwmMotor(0, 0, 0); // Stop all motors
+        basic.pause(50); // Short pause before next step
+    }
+}
+
+// Function to move the robot by distance
+//% blockId=move_robot_distance block="Move robot %direction for %distance cm"
+//% weight=102 color=#585CA9
+export function moveRobotByDistance(direction: Direction, distance: number): void {
+    const speed = 100; // Speed at which the robot moves
+    const Rdistance = distance*2
+    const timeToMove = Rdistance / speed * 1000; // Calculate time in milliseconds
+
+    if (direction === Direction.Forward) {
+        setPwmMotor(1, 100, 100); // Move forward
+    } else if (direction === Direction.Backward) {
+        setPwmMotor(2, 100, 100); // Move backward
+    }
+    basic.pause(timeToMove); // Move for the calculated time
+    // Stop all motors after the movement
+    setPwmMotor(0, 0, 0); // Stop all motors
+}
+
+// Enum for direction
+export enum Direction2 {
+    //% block="forward"
+    Forward,
+    //% block="backward"
+    Backward
+}
+
+// Speed of the robot in cm/second at speed value 100
+const cmPerSecondAtSpeed100 = 50; 
+
+// Function to convert speed value (0-100) to actual speed in cm/second
+function speedValueToCmPerSecond(speedValue: number): number {
+    return (speedValue / 100) * cmPerSecondAtSpeed100;
+}
+
+// Function to move the robot based on user-defined time, speed, and direction
+//% blockId=move_robot_time_speed_direction block="Move robot %direction for %time seconds at speed %speed"
+//% weight=103 color=#585CA9
+export function moveRobotForTimeAndSpeed(direction: Direction2, time: number, speed: number): void {
+    const speedCmPerSecond = speedValueToCmPerSecond(speed);
+    
+    if (direction === Direction2.Forward) {
+        setPwmMotor(1, speed, speed); // Move forward
+    } else if (direction === Direction2.Backward) {
+        setPwmMotor(2, speed, speed); // Move backward
+    }
+
+    basic.pause(time * 1000); // Convert time from seconds to milliseconds
+    setPwmMotor(0, 0, 0); // Stop all motors after the specified time
+}
+
 }
