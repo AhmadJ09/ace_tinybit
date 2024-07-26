@@ -473,4 +473,24 @@ namespace Tinybit {
     export function stopRobot(): void {
         setPwmMotor(0, 0, 0); // Stop all motors
     }
+
+
+        // Function to turn the robot by a specific angle
+    //% blockId=turn_robot_angle block="Turn robot %direction by %angle degrees"
+    //% weight=92
+    //% angle.min=0 angle.max=360
+    //% blockGap=10
+    //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
+    export function turnRobotByAngle(direction: TurnDirection, angle: number): void {
+        let turnTimePer90Degrees = 500; // Time to turn 90 degrees
+        let turnTime = (angle / 90) * turnTimePer90Degrees; // Calculate time for the specified angle
+
+        if (direction === TurnDirection.Left) {
+            setPwmMotor(3, 100, 100); // Turn left
+        } else if (direction === TurnDirection.Right) {
+            setPwmMotor(4, 100, 100); // Turn right
+        }
+        control.waitMicros(turnTime * 1000); // Wait for the calculated time
+        setPwmMotor(0, 0, 0); // Stop the robot
+    }
 }
