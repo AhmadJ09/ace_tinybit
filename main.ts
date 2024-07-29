@@ -254,12 +254,15 @@ namespace TinybitACE {
 
 
 
-    //% blockId=Tinybit_CarCtrl block="Car Control|%index|for %time s"
+    //% blockId=Tinybit_CarCtrl block="Car Control|%index || for %time s"
     //% weight=5
     //% blockGap=10
     //% color="#585CA9"
+    //% expandableArgumentMode="toggle"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
-    export function CarCtrl(index: CarState, time: number): void {
+    export function CarCtrl(index: CarState, time?: number): void {
+        if (time === undefined) {
+        time = -1;}
         switch (index) {
             case CarState.Car_Run: Car_run(255, 255); break;
             case CarState.Car_Back: Car_back(255, 255); break;
@@ -273,13 +276,16 @@ namespace TinybitACE {
         setPwmMotor(0, 0, 0); // Stop the robot
     }
 
-    //% blockId=Tinybit_CarCtrlSpeed block="Car Control|%index|speed %speed|for %time s"
+    //% blockId=Tinybit_CarCtrlSpeed block="Car Control|%index|speed %speed ||for %time s"
     //% weight=6
     //% blockGap=10
+    //% expandableArgumentMode="toggle"
     //% speed.min=0 speed.max=255
     //% color="#585CA9"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
-    export function CarCtrlSpeed(index: CarState, speed: number, time: number): void {
+    export function CarCtrlSpeed(index: CarState, speed: number, time?: number): void {
+        if (time === undefined) {
+        time = -1;}
         switch (index) {
             case CarState.Car_Run: Car_run(speed, speed); break;
             case CarState.Car_Back: Car_back(speed, speed); break;
@@ -293,14 +299,17 @@ namespace TinybitACE {
         setPwmMotor(0, 0, 0); // Stop the robot
     }
 
-    //% blockId=Tinybit_CarCtrlSpeed2 block="Car Control|%index|speed1 %speed1|speed2 %speed2 for %time s"
+    //% blockId=Tinybit_CarCtrlSpeed2 block="Car Control|%index|speed1 %speed1|speed2 %speed2 ||for %time s"
     //% weight=7
     //% blockGap=10
+    //% expandableArgumentMode="toggle"
     //% speed1.min=0 speed1.max=255 speed2.min=0 speed2.max=255
     //% color="#585CA9"
     //% inlineInputMode=inline
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
-    export function CarCtrlSpeed2(index: CarState, speed1: number, speed2: number, time: number): void {
+    export function CarCtrlSpeed2(index: CarState, speed1: number, speed2: number, time?: number): void {
+        if (time === undefined) {
+        time = -1;}
         switch (index) {
             case CarState.Car_Run: Car_run(speed1, speed2); break;
             case CarState.Car_Back: Car_back(speed1, speed2); break;
@@ -426,7 +435,7 @@ namespace TinybitACE {
     //% blockGap=10
     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
     export function turnRobot(direction: TurnDirection): void {
-        let turnTime = 500; // Adjust this value based on your robot's turning speed and calibration
+        let turnTime = 450; // Adjust this value based on your robot's turning speed and calibration
         if (direction === TurnDirection.Left) {
             setPwmMotor(3, 100, 100); // Turn left
         } else if (direction === TurnDirection.Right) {
@@ -451,7 +460,7 @@ namespace TinybitACE {
     //% blockGap=10
     //% direction.fieldEditor="gridpicker" direction.fieldOptions.columns=4
     export function turnRobotByAngle(direction: TurnDirection, angle: number): void {
-        let turnTimePer90Degrees = 500; // Time to turn 90 degrees
+        let turnTimePer90Degrees = 450; // Time to turn 90 degrees
         let turnTime = (angle / 90) * turnTimePer90Degrees; // Calculate time for the specified angle
 
         if (direction === TurnDirection.Left) {
