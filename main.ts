@@ -2,10 +2,10 @@
 Copyright (C): 2010-2019, Shenzhen Yahboom Tech
 modified from liusen
 load dependency
-"Tinybit": "file:../pxt-Tinybit"
+"Tinybit-ACE": "file:../pxt-Tinybit"
 */
 //% color="#585CA9" weight=20 icon="\uf1b9"
-namespace Tinybit {
+namespace TinybitACE {
     const PWM_ADD = 0x01
     const MOTOR = 0x02
     const RGB = 0x01
@@ -134,25 +134,7 @@ namespace Tinybit {
         pins.i2cWriteBuffer(PWM_ADD, buff);
 
     }
-    function move_step(): void {
-        let buf = pins.createBuffer(5);
-        buf[0] = MOTOR;
-        //setTimeout(stop_the_car, 5000);
-        buf[1] = 100; buf[2] = 0; buf[3] = 100; buf[4] = 0;    //run    
-        pins.i2cWriteBuffer(PWM_ADD, buf);
-        control.waitMicros(500000);  // 5 seconds
-        stop_the_car();
-    }
 
-    function move_steps(num_steps: number): void {
-        let buf = pins.createBuffer(5);
-        buf[0] = MOTOR;
-        //setTimeout(stop_the_car, 500*num_steps);
-        buf[1] = 100; buf[2] = 0; buf[3] = 100; buf[4] = 0;    //run    
-        pins.i2cWriteBuffer(PWM_ADD, buf);
-        control.waitMicros(500000 * num_steps);  // 5 seconds
-        stop_the_car();
-    }
     function Car_run(speed1: number, speed2: number) {
         setPwmMotor(1, speed1, speed2);
     }
@@ -191,26 +173,6 @@ namespace Tinybit {
         }
         return yahStrip;
     }
-    //% blockId=one_step_forward block="one_step_forward"
-    //% weight=1
-    //% blockGap=10
-    //% color="#585CA9"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function one_step_forward(): void {
-
-        move_step();
-    }
-
-    //% blockId=Move_Steps block="Move_Steps|n_steps %n_steps"
-    //% weight=2
-    //% blockGap=10
-    //% color="#585CA9"
-    //% name.fieldEditor="gridpicker" name.fieldOptions.columns=4
-    export function Move_Steps(n_steps: number): void {
-
-        move_steps(n_steps);
-    }
-
     //% blockId=Tinybit_RGB_Car_Big block="Light Color %value"
     //% weight=3
     //% blockGap=10
@@ -260,7 +222,7 @@ namespace Tinybit {
         setPwmRGB(Red, Green, Blue);
     }
 
-    //% blockId=Tinybit_Music_Car block="Music_Car|%index"
+    //% blockId=Tinybit_Music_Car block="Robot music|%index"
     //% weight=11
     //% blockGap=10
     //% color="#585CA9"
@@ -292,12 +254,12 @@ namespace Tinybit {
 
 
 
-    //% blockId=Tinybit_CarCtrl block="CarCtrl|%index"
+    //% blockId=Tinybit_CarCtrl block="Car Control|%index|for %time s"
     //% weight=5
     //% blockGap=10
     //% color="#585CA9"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
-    export function CarCtrl(index: CarState): void {
+    export function CarCtrl(index: CarState, time: number): void {
         switch (index) {
             case CarState.Car_Run: Car_run(255, 255); break;
             case CarState.Car_Back: Car_back(255, 255); break;
@@ -307,15 +269,17 @@ namespace Tinybit {
             case CarState.Car_SpinLeft: Car_spinleft(255, 255); break;
             case CarState.Car_SpinRight: Car_spinright(255, 255); break;
         }
+        control.waitMicros(time * 1000000); // Wait for the specified time
+        setPwmMotor(0, 0, 0); // Stop the robot
     }
 
-    //% blockId=Tinybit_CarCtrlSpeed block="CarCtrlSpeed|%index|speed %speed"
+    //% blockId=Tinybit_CarCtrlSpeed block="Car Control|%index|speed %speed|for %time s"
     //% weight=6
     //% blockGap=10
     //% speed.min=0 speed.max=255
     //% color="#585CA9"
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
-    export function CarCtrlSpeed(index: CarState, speed: number): void {
+    export function CarCtrlSpeed(index: CarState, speed: number, time: number): void {
         switch (index) {
             case CarState.Car_Run: Car_run(speed, speed); break;
             case CarState.Car_Back: Car_back(speed, speed); break;
@@ -325,15 +289,18 @@ namespace Tinybit {
             case CarState.Car_SpinLeft: Car_spinleft(speed, speed); break;
             case CarState.Car_SpinRight: Car_spinright(speed, speed); break;
         }
+        control.waitMicros(time * 1000000); // Wait for the specified time
+        setPwmMotor(0, 0, 0); // Stop the robot
     }
 
-    //% blockId=Tinybit_CarCtrlSpeed2 block="CarCtrlSpeed2|%index|speed1 %speed1|speed2 %speed2"
+    //% blockId=Tinybit_CarCtrlSpeed2 block="Car Control|%index|speed1 %speed1|speed2 %speed2 for %time s"
     //% weight=7
     //% blockGap=10
     //% speed1.min=0 speed1.max=255 speed2.min=0 speed2.max=255
     //% color="#585CA9"
+    //% inlineInputMode=inline
     //% name.fieldEditor="gridpicker" name.fieldOptions.columns=10
-    export function CarCtrlSpeed2(index: CarState, speed1: number, speed2: number): void {
+    export function CarCtrlSpeed2(index: CarState, speed1: number, speed2: number, time: number): void {
         switch (index) {
             case CarState.Car_Run: Car_run(speed1, speed2); break;
             case CarState.Car_Back: Car_back(speed1, speed2); break;
@@ -343,6 +310,8 @@ namespace Tinybit {
             case CarState.Car_SpinLeft: Car_spinleft(speed1, speed2); break;
             case CarState.Car_SpinRight: Car_spinright(speed1, speed2); break;
         }
+        control.waitMicros(time * 1000000); // Wait for the specified time
+        setPwmMotor(0, 0, 0); // Stop the robot
     }
 
 
@@ -514,7 +483,7 @@ export function moveRobotBySteps(direction: Direction, steps: number): void {
         } else if (direction === Direction.Backward) {
             setPwmMotor(2, 100, 100); // Move backward
         }
-        basic.pause(200); // Pause for visibility of each step
+        basic.pause(500); // Pause for visibility of each step
         // Stop motors after each step
         setPwmMotor(0, 0, 0); // Stop all motors
         basic.pause(50); // Short pause before next step
