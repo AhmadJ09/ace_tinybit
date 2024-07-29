@@ -5,7 +5,7 @@ load dependency
 "Tinybit-ACE": "file:../pxt-Tinybit"
 */
 //% color="#585CA9" weight=20 icon="\uf1b9"
-namespace TinybitACE {
+namespace Tinybit_ACE {
     const PWM_ADD = 0x01
     const MOTOR = 0x02
     const RGB = 0x01
@@ -447,7 +447,7 @@ namespace TinybitACE {
     //% blockId=stop_robot block="stop robot"
     //% weight=99
     //% blockGap=10
-    //% color="#bf6753"
+    //% color="#585CA9"
     export function stopRobot(): void {
         setPwmMotor(0, 0, 0); // Stop all motors
     }
